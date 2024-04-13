@@ -3,12 +3,12 @@ require('dotenv').config();
 
 const fetchUser = (req, res, next) => {
     try {
-        const authToken = req.header('authtoken');
+        const authToken = req.header('authToken');
 
         if (!authToken) {
             return res.status(401).json({ error: "Authentication token missing" });
         }
-
+        console.log(authToken);
         jwt.verify(authToken, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
             if (err) {
                 return res.status(401).json({ error: "Invalid authentication token" });
