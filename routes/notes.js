@@ -8,7 +8,7 @@ const Note = require('../models/Note');
 router.get('/getnote', fetchUser, async (req, res) => {
     try {
         // res.json({reqUser:req.user})
-        const userNotes = await Note.find({ user: req.user._id });
+        const userNotes = await Note.find({ user: req.user.id });
         res.json({reqUser:req.user,userNotes});
         // res.json(userNotes);
     } catch (err) {
@@ -29,7 +29,7 @@ router.post('/addnote', fetchUser, [
     const { title, description, tag } = req.body;
     try {
         const newNote = new Note({
-            user: req.user._id,
+            user: req.user.id,
             title,
             description,
             tag
